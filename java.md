@@ -2,9 +2,21 @@
 
 ## 一、java环境设置
 
-### 1.安装Java
+### 1.下载安装JavaJDK
+
+<https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html>
+
+jdk是开发工具
+
+jre仅是运行环境
 
 ### 2.设置环境变量
+
+JAVA
+
+classpath
+
+PATH
 
 ##  二、Java基础
 
@@ -58,7 +70,7 @@ Java使用关键字标识功能，产生语法语义。
 
 变量的值可以修改多次。而变量的空间大小的不变的，空间位置改变，即修改了引用的指针。  
 
- 
+ 变量需要赋值才能使用，声明变量本质只是生成了引用标签，空间未申请，赋值后才实际申请了空间。
 
 ### 6.数据类型
 
