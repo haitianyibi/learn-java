@@ -10,6 +10,8 @@ JSR规范\JCP组织\RI参考现实\TCK兼容性测试套件
 
 IDE是集成开发环境：Integrated Development Environment
 
+参考(https://www.liaoxuefeng.com/)
+
 ## 一、java环境设置
 
 ### 1.下载安装JavaJDK
@@ -246,11 +248,37 @@ java变量分两种，基本类型变量+引用类型变量
 
 语句：表达式语句、赋值语句、增量语句、方法调用语句、对象创建语句、声明语句、控制流语句。
 
+###  9.数组 
+
+* 基本类型数组
+* 引用类型数组
+
+### 10.输入和输出
+
+import 导入java.util.Scanner类
+
+* print()
+* println()
+* printf()+占位符
+* Scanner scanner =new Scanner(System.in)创建scanner对象
+* scanner.nextLine()读取一行输入获取字符串
+* scanner.nextInt()读取一行输入获取整数
+
+### 11.if判断
+
+### 12.switch多重选择
+
+### 13.while循环
+
+### 14.for循环
+
+### 15.break和continue
+
 ## 三、java初级
 
 ### 1.类
 
-class
+class本身就是一种数据类型
 
 类主体用{}括起即类的定义，类变量、实例变量、方法、构造函数
 
@@ -289,6 +317,18 @@ class
 java是面向对象的语言，一个程序的基本单位是class
 
 在类的内部可以定义若干方法
+
+在OOP的术语中，我们把`Person`称为超类（super class），父类（parent class），基类（base class），把`Student`称为子类（subclass），扩展类（extended class）。
+
+继承树
+
+向上转型
+
+向下转型
+
+super
+
+protect
 
 ### 2.对象
 
@@ -371,3 +411,29 @@ var sb = new StringBuilder();
 ```
 javac --source 13 --enable-preview Main.java
 ```
+
+### 11.传参（方法的参数绑定）
+
+### 12.构造方法
+
+### 13.多态
+
+### 14.抽象类
+
+### 15.静态字段与静态方法
+
+### 16.包
+
+### 17.作用域
+
+### 18.模块
+
+### 19.classpath和jar
+
+### 20.方法重载
+
+
+
+## 四、java中阶
+
+## 五、java高级
