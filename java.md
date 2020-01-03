@@ -1,6 +1,14 @@
 [TOC]
 
+# java简介
 
+c语言、c++语言都是编译成二进制文件，由计算机直接执行，称编译型语言。python、ruby等解释型语言由解释器直接加载源码然后运行，而java将源码编译成.class字节码，类似于抽象的CPU指令，针对不同平台编写虚拟机，虚拟机加载字节码并执行，形成一次编写处处运行的效果。
+
+java EE \java SE\java ME即企业版、标准版、micro版
+
+JSR规范\JCP组织\RI参考现实\TCK兼容性测试套件
+
+IDE是集成开发环境：Integrated Development Environment
 
 ## 一、java环境设置
 
@@ -14,11 +22,80 @@ jre仅是运行环境
 
 ### 2.设置环境变量
 
-JAVA
+JAVA_HOME指向JDK安装目录
 
-classpath
+classpath指向默认字节码位置，当前位置"."
 
-PATH
+PATH指向JDK安装目录下的bin目录%JAVA_HOME%\bin;
+
+bin目录下的工具:
+
+* java：即 JVM
+* javac：java编译器将.java源文件转化为.class字节码文件
+* jar：用于把一类的.class文件打包成一个.jar文件
+* jdb：java调试器，用于开发阶段的运行调试
+
+### 3.第一个java程序
+
+```java
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}
+```
+
+一个公开的类叫hello,大小敏感，{}里是类的定义，一个公开的静态方法叫main，()里为方法参数，参数类型String[],参数名args，返回类型为void即空，每行代码；分号结束System类的.out方法的.println方法传入参数“hello，world!”。
+
+一个java源码只能定义一个public类型的class,并且class名要和文件名完全一致。
+
+
+java文件中有多个类，且没有public类，那么文件名任意，编译的.class文件也对应有多个（JDK8）
+
+
+main方法是java程序的入口，总是从main方法开始执行代码。
+
+java缩进不是必须的
+
+保存文件名必须和public类名相同，大小写敏感，文件类型.java
+
+```javac  类名.java```
+
+编译，在当前文件夹下生成.class文件
+
+```java 类名```
+
+运行，不需要文件类型后缀
+
+或直接
+
+```java 类名.java```
+
+JVM会自动编译并运行文件
+
+这是Java 11新增的一个功能，它可以直接运行一个单文件源码！
+
+需要注意的是，在实际项目中，单个不依赖第三方库的Java源码是非常罕见的，所以，绝大多数情况下，我们无法直接运行一个Java源码文件，原因是它需要依赖其他的库。
+
+![image-20200103212014828](Java.assets/image-20200103212014828.png)
+
+[出现编码GBK不可映射字符](https://jingyan.baidu.com/article/e3c78d649a56233c4c85f502.html)
+
+因为代码中含有中文，包括注释，系统默认编码格式GBK，中文字符代码格式UNICODE，
+
+notepad++编译器具有自动转码功能。
+
+为文件指定编码格式
+
+javac -encoding UTF-8 类名.java
+
+[出现需要class,interface、enum](https://blog.csdn.net/a66731167/article/details/81286537)
+
+![image-20200103212127750](Java.assets/image-20200103212127750.png)
+
+重新保存文件，编码格式改为ANSI
+
+
 
 ##  二、Java基础
 
@@ -48,7 +125,9 @@ JavaDoc注释方式
 
 ### 2.标识符
 
-用户可以起名的标识，如类名，变量名。  
+用户可以起名的标识，如类名，变量名， 区分大小写。
+
+java关键字保留即不能用作标识符，类名使用驼峰式写法，方法名使用小驼峰式写法、
 
 必须先声明变量后使用，
 
@@ -154,7 +233,7 @@ Java使用关键字标识功能，产生语法语义。  关键字不做变量�
 
 class
 
-类主体用{}括起，类变量、实例变量、方法、构造函数
+类主体用{}括起即类的定义，类变量、实例变量、方法、构造函数
 
 大驼峰写法
 
