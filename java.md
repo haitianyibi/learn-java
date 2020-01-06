@@ -8,9 +8,11 @@ java EE \java SE\java ME即企业版、标准版、micro版
 
 JSR规范\JCP组织\RI参考现实\TCK兼容性测试套件
 
-IDE是集成开发环境：Integrated Development Environment
+IDE是集成开发环境：Integrated Development Environment 
 
 参考(https://www.liaoxuefeng.com/)
+
+参考(https://www.w3cschool.cn/java/)
 
 ## 一、java环境设置
 
@@ -127,9 +129,9 @@ javac -encoding UTF-8 类名.java
 
 ### 2.标识符
 
-用户可以起名的标识，如类名，变量名， 区分大小写。英文字母、$美元符号、_下划线开头，加上数字可以作为标识符的元素，但是数字不能作为标识符开头。
+用户可以起名的标识，如类名，变量名、方法名， 区分大小写。英文字母、$美元符号、_下划线开头，加上数字可以作为标识符的元素，但是数字不能作为标识符开头。
 
-java关键字保留即不能用作标识符，类名使用驼峰式写法，方法名使用小驼峰式写法、
+java关键字、保留字即不能用作标识符，类名使用驼峰式写法，方法名使用小驼峰式写法、
 
 必须先声明变量后使用，
 
@@ -155,6 +157,12 @@ java关键字保留即不能用作标识符，类名使用驼峰式写法，方�
 
 Java使用关键字标识功能，产生语法语义。  关键字不做变量名、类名。
 
+关键字：
+
+**abstract	class extends	implement	null	strictfp	true	assert	const		false	import	package	super	 try	boolean	continue	final	instanceof	private	switch	void	break	default	finally	int	protected	synchronized	volatile	byte	do	float	interface	public	this	while	case	double	for	long	return	throw	catch	else	goto	native	short	throws	char	enum	if	new	static	transient**
+
+
+
 ### 4.字面值（常量）
 
 类似c语言中的字符常量。  1、a、屏幕、3.14。
@@ -163,9 +171,13 @@ Java使用关键字标识功能，产生语法语义。  关键字不做变量�
 
 常量名习惯全部大写。
 
+
+
+
+
 ### 5.变量
 
-变量本质上是内存的一块空间。变量包含数据类型、名称、字面值。  
+变量本质上是内存的一块空间，还具有可见性/生存周期。变量包含数据类型、名称、字面值。  
 
 所有变量必须具有类型。
 
@@ -191,6 +203,12 @@ java变量分两种，基本类型变量+引用类型变量
 
 给变量赋值时jvm给新值一个空间并将变量标签重新指向新变量空间，不是将旧变量空间替换值。
 
+允许创建赋值链
+
+允许动态初始化
+
+
+
 ### 6.数据类型
 
 如int、short、float、char、String。  
@@ -211,6 +229,34 @@ java变量分两种，基本类型变量+引用类型变量
 枚举类型
 
 数据类型的自动转换与强制转换
+
+布尔类型的true和false不等于1和0
+
+byte是有符号的8位类型-128~127
+
+short是有符号的16位类型-32768~32767
+
+int是有符号的 32位类型，byte和short在表达式中时自动转化为int
+
+long是有符号64位，1l、1L
+
+八进制010
+
+十六进制0x10
+
+float32位宽
+
+double64位宽，1.4E5F、2e3f
+
+浮点类型支持科学计数法
+
+双值常数，支持+00正无穷 -00负无穷 +0.0 -0.0	NaN
+
+java使用unicode表示字符 \u5465
+
+char为16位0~65536，单引号，可以和整数类型运算
+
+
 
 ### 7.运算符的优先级
 
@@ -241,6 +287,10 @@ java变量分两种，基本类型变量+引用类型变量
 三元：表达式?表达式1:表达式2
 
 分配：=、+=、-=、*=、/=、%=、&=、^=、|=、<<=、>>=、>>>=
+
+算术运算符的操作数必须是数字类型，也可以对char类型使用，但是不可以对boolean类型使用
+
+算术运算符、布尔逻辑运算符、关系运算符、三元运算符、按位运算符
 
 ### 8.表达式
 
@@ -273,6 +323,14 @@ import 导入java.util.Scanner类
 ### 14.for循环
 
 ### 15.break和continue
+
+### 16.转义字符
+
+\\'	\\"	\\\	\r	\f	\t	\b	\n
+
+八进制\123	十六进制unicode字符\u061
+
+
 
 ## 三、java初级
 
@@ -496,7 +554,7 @@ Java的实例方法调用是基于运行时的实际类型的动态调用，而�
 @Override是伪代码,表示重写。(当然不写@Override也可以)，不过写上有如下好处: 
 1、可以当注释用,方便阅读；
 2、编译器可以给你验证@Override下面的方法名是否是你父类中所有的，如果没有则报错。例如，你如果没写@Override，而你下面的方法名又写错了，这时你的编译器是可以编译通过的，因为编译器以为这个方法是你的子类中自己增加的方法。
- 
+
 举例：在重写父类的onCreate时，在方法前面加上@Override 系统可以帮你检查方法的正确性。
 @Override
 public void onCreate(Bundle savedInstanceState)
