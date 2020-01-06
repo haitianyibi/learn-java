@@ -127,6 +127,10 @@ javac -encoding UTF-8 类名.java
 
 */
 
+javadoc可以添加标签
+
+<p>、<code>、@author、@deprecated、@param、@see、@since、@return
+
 ### 2.标识符
 
 用户可以起名的标识，如类名，变量名、方法名， 区分大小写。英文字母、$美元符号、_下划线开头，加上数字可以作为标识符的元素，但是数字不能作为标识符开头。
@@ -280,7 +284,7 @@ char为16位0~65536，单引号，可以和整数类型运算
 
 按位或：|
 
-逻辑与：&&
+逻辑与：&& 
 
 逻辑或：||
 
@@ -291,6 +295,8 @@ char为16位0~65536，单引号，可以和整数类型运算
 算术运算符的操作数必须是数字类型，也可以对char类型使用，但是不可以对boolean类型使用
 
 算术运算符、布尔逻辑运算符、关系运算符、三元运算符、按位运算符
+
+Java三元运算符基本上是简单的if语句的简写形式。
 
 ### 8.表达式
 
@@ -316,13 +322,77 @@ import 导入java.util.Scanner类
 
 ### 11.if判断
 
+if(条件trun则执行){
+
+}
+
+if(){
+
+}else if(){
+
+}
+
+if(){
+
+}else
+
+dosomething
+
 ### 12.switch多重选择
 
 ### 13.while循环
 
+while(条件){
+
+}
+
+do{
+
+}while(条件);
+
+
+
 ### 14.for循环
 
+for(初始;条件;变化){
+
+}
+
+允许多个变量控制循环for(int i=0,j=n;i<j;i++,j--){
+
+}
+
+初始，变化可以为空，条件不能空for(;!aboolean;){}
+
+for循环可以嵌套
+
+Java for each循环对序列元素迭代，不使用循环计数器
+
+for(String s:arr){//arr为string数组、类型要与数组类型兼容
+
+}
+
+for(int a[]:arr){//arr为二维数组
+
+}
+
+
+
 ### 15.break和continue
+
+break；循环终止，多重循环时只会终止内层循环
+
+switch分支的break会跳出switch语句。分支终止
+
+continue完成这次循环，内层
+
+continue可以使用标签lable
+
+lable名:语句
+
+continue lable名；
+
+
 
 ### 16.转义字符
 
