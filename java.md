@@ -130,6 +130,9 @@ javac -encoding UTF-8 类名.java
 javadoc可以添加标签
 
 <p>、<code>、@author、@deprecated、@param、@see、@since、@return
+javadoc -d 文件夹名称 -author -version HelloWorld.java
+
+
 
 ### 2.标识符
 
