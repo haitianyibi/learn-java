@@ -85,7 +85,7 @@ JVM会自动编译并运行文件
 
 [出现编码GBK不可映射字符](https://jingyan.baidu.com/article/e3c78d649a56233c4c85f502.html)
 
-因为代码中含有中文，包括注释，系统默认编码格式GBK，中文字符代码格式UNICODE，
+因为代码中含有中文，包括注释，系统默认编码格式GBK，中文字符代码格式UNICODE或UTF-8
 
 notepad++编译器具有自动转码功能。
 
@@ -477,6 +477,22 @@ java是面向对象的语言，一个程序的基本单位是class
 super
 
 protect
+
+* 行尾风格
+
+a{
+
+}
+
+* 次行风格
+
+a
+
+{
+
+}
+
+
 
 ### 2.对象
 
