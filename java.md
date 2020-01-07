@@ -2,7 +2,7 @@
 
 # java简介
 
-c语言、c++语言都是编译成二进制文件，由计算机直接执行，称编译型语言。python、ruby等解释型语言由解释器直接加载源码然后运行，而java将源码编译成.class字节码，类似于抽象的CPU指令，针对不同平台编写虚拟机，虚拟机加载字节码并执行，形成一次编写处处运行的效果。
+c语言、c++语言都是**编译**成二进制文件，由计算机直接执行，称编译型语言。python、ruby等解释型语言由解释器直接加载源码然后运行，而java将源码编译成.class字节码，类似于抽象的CPU指令，针对不同平台编写虚拟机，虚拟机加载字节码并执行，形成一次编写处处运行的效果。
 
 java EE \java SE\java ME即企业版、标准版、micro版
 
@@ -99,13 +99,15 @@ javac -encoding UTF-8 类名.java
 
 重新保存文件，编码格式改为ANSI
 
+### 4.notepad++
 
 
-##  二、Java基础
+
+##  二、Java基础（编程语言基础）
 
 ### 1.Java的注释
 
-* 单行注释
+* 单行注释（可以用于查找错误）
 
 //
 
@@ -121,34 +123,39 @@ javac -encoding UTF-8 类名.java
 
 /**
 
-*
+*@author haitianyibi
 
-*
+*@version 1.0
 
 */
 
 javadoc可以添加标签
 
-<p>、<code>、@author、@deprecated、@param、@see、@since、@return
+@author、@deprecated、@param、@see、@since、@return
+
 javadoc -d 文件夹名称 -author -version HelloWorld.java
 
 
 
 ### 2.标识符
 
-用户可以起名的标识，如类名，变量名、方法名， 区分大小写。英文字母、$美元符号、_下划线开头，加上数字可以作为标识符的元素，但是数字不能作为标识符开头。无限长度的unicode编码，使用完整的单词，而不要使用隐含的缩写
+* 用户可以起名的标识，如类名，变量名、方法名、接口名、包名
 
-java关键字、保留字即不能用作标识符，类名使用驼峰式写法，普通变量和方法名使用小驼峰式写法、常量全大写、
+* 英文字母、$美元符号、_下划线开头，加上数字可以作为标识符的元素，但是数字不能作为标识符开头
 
-必须先声明变量后使用，
+* 区分大小写、无限长度的unicode编码，使用完整的单词，而不要使用隐含的缩写
 
-四种变量
+* java关键字、保留字即不能用作标识符，类名、接口名使用驼峰式写法，普通变量和方法名使用小驼峰式写法、常量全大写、包名字母都小写（建议规范：命名不遵守规范编译可以通过）
+
+* 必须先声明变量后使用，有垃圾回收机制。
+
+四种变量分类：
 
 1.实例变量(非静态字段)
 
 实例变量的值对于每一个实例都是唯一的。
 
-2.类变量(静态字段)
+2.类变量(静态字段static)
 
 无论实例化多少次，都存在一个副本应用于所有对象。，添加final修饰符将无法修改。
 
@@ -160,15 +167,41 @@ java关键字、保留字即不能用作标识符，类名使用驼峰式写法�
 
 方法的小括号之间。*参数*是指方法声明中的变量列表
 
-### 3.关键字
+### 3.关键字与保留字
 
-Java使用关键字标识功能，产生语法语义。  关键字不做变量名、类名。
+* Java使用关键字标识功能，产生语法语义。  
 
-关键字：
+* 关键字不做变量名、类名、方法名。
+
+* 关键字中所有字母都是小写。
+
+关键字keyword：
 
 **abstract	class extends	implement	null	strictfp	true	assert	const		false	import	package	super	 try	boolean	continue	final	instanceof	private	switch	void	break	default	finally	int	protected	synchronized	volatile	byte	do	float	interface	public	this	while	case	double	for	long	return	throw	catch	else	goto	native	short	throws	char	enum	if	new	static	transient**
 
+保留字reservedword：
 
+**goto	const**
+
+数据类型：class	interface	enum	byte	short	int	long	float	double	char	boolean	void
+
+流程控制：if	else	switch	case	default	while	do	for	break	continue	return
+
+访问权限修饰符：private	protected	public
+
+类、变量、方法修饰符：abstract	final	static	synchronized
+
+类与类关系：extends	implements
+
+实例、引用、判断实例：new	this	super	instanceof
+
+异常处理：try	catch	finally	throw	throws
+
+包：package	import
+
+其他修饰符：native	strictfp	transient	volatile	assert
+
+数据类型值字面值：true	false	null
 
 ### 4.字面值（常量）
 
@@ -198,7 +231,7 @@ java变量分两种，基本类型变量+引用类型变量
 
 变量声明：int a;int b,c;  
 
-变量同时声明和赋值:int a=1;
+变量同时声明和赋值即定义:int a=1;
 
 字面值的数据类型要和变量的数据类型一致。  
 
@@ -220,13 +253,13 @@ java变量分两种，基本类型变量+引用类型变量
 
 静态变量（类变量）
 
+变量的作用域之内必须唯一，不同作用域可以有相同变量名
+
+定义创建了变量，并为其分配内存；声明没有分配内存。
+
+一个变量在一定的区域内只能被定义一次，却可以被多次声明。
+
 ### 6.数据类型
-
-如int、short、float、char、String。  
-
-不同数据类型可以指示编译器申请空间和限制变量的类型。  
-
-原始数据类型int 、short、 char、long、float、double、String、boolean、byte、
 
 基本数据类型是CPU可以直接进行运算的类型：
 
@@ -235,9 +268,17 @@ java变量分两种，基本类型变量+引用类型变量
 * 字符类型char
 * 布尔类型boolean
 
-`_`数字文字中数字之间的任何位置都可以出现任意数量的下划线字符。
+引用数据类型：
+
+* 类class
+* 接口interface
+* 数组
 
 枚举类型
+
+不同数据类型可以指示编译器申请空间和限制变量的类型。  
+
+`_`数字文字中数字之间的任何位置都可以出现任意数量的下划线字符。
 
 数据类型的自动转换与强制转换
 
@@ -422,7 +463,7 @@ enum Weekday {
 - 定义的每个实例都是引用类型的唯一实例；
 - 可以将`enum`类型用于`switch`语句。
 
-## 三、java初级
+## 三、java初级（java特性）
 
 ### 1.类
 
@@ -812,9 +853,11 @@ JDK的其它常用类定义在`java.util.*`，`java.math.*`，`java.text.*`，�
 
 @Override
 
+### 23.java API文档
 
 
-## 四、java中阶
+
+## 四、java中阶（java常用类）
 
 ### 1.字符串和编码
 
