@@ -10,6 +10,12 @@ JSR规范\JCP组织\RI参考现实\TCK兼容性测试套件
 
 IDE是集成开发环境：Integrated Development Environment 
 
+三大特征：
+
+* 封装
+* 多态
+* 继承
+
 ## 一、java环境设置
 
 ### 1.下载安装JavaJDK
