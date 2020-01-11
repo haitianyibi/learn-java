@@ -561,9 +561,20 @@ for( int a = 0; a < 10; a++) {
 
 # 四、类和对象
 
+类声明为类命名，并将类主体括在大括号之间。类名之前可以有修饰符。类主体包含该类的字段，方法和构造函数。一个类使用字段来包含状态信息，并使用方法来实现行为。初始化类的新实例的构造函数使用类的名称，并且看起来像没有返回类型的方法。
+
+您可以通过相同的方式控制对类和成员的访问：通过使用访问修饰符（例如`public`在其声明中）。
+
+您可以使用`static`成员声明中的关键字来指定类变量或类方法。未声明为`static`的成员为实例成员。类变量由类的所有实例共享，并且可以通过类名称以及实例引用进行访问。类的实例获得每个实例变量的自己的副本，必须通过实例引用对其进行访问。
+
+您可以通过使用`new`运算符和构造函数从类创建对象。new运算符返回对创建的对象的引用。您可以将引用分配给变量或直接使用它。
+
+垃圾收集器会自动清除未使用的对象。如果程序不再保存对该对象的引用，则该对象未使用。您可以通过将保存引用的变量设置为`null`来显式删除引用。
+
 ## 1.类Classes
 
 * 类本身就是一种数据类型
+
 * 类可以有多个字段、多个构造器、多个方法
 * 在面向对象OOP的术语中，把extends后的类称为超类（super class），父类（parent class），基类（base class），把extends前的类称为子类（subclass），扩展类（extended class）。
 
@@ -722,7 +733,7 @@ public double calculateAnswer(){
  }
 ```
 
-### 访问控制
+### 访问控制Controlling Access
 
 * 访问修饰符确定其他类是否可以访问一个类的字段和方法
 * 访问控制只是对其他类来说，不是对被修饰的类或成员变量。
@@ -742,23 +753,130 @@ At the member level：类中成员的权限修饰符有：`public`, `private`, `
 *   当成员申明为private时，它只对本类是可见的。
 *   当成员申明为protected时，除了对自己所在的包内所有类是可见的还对其他包内的本类的子类是可见的。
 
-### 类成员
+### 类成员Class Members
 
-### 初始化字段
+`static`关键字来创建属于该类而不是该类实例的字段和方法，称静态方法以及静态变量，又称类变量和类方法。
 
-## 3.嵌套类
+static关键字可以和final关键字一起使用。
 
-### 内部类示例
+#### 类变量
 
-### 本地类
+* 从同一类创建对象有各自的实例变量副本，存储在不同的位置，类变量（静态变量）允许所有对象共享一个变量，使得对象可以读取相同的值，该变量只有一个副本，任何该类的实例（对象）都可以访问和修改类变量，一个类可以有多个类变量。
 
-### 匿名类
+#### 类方法
+
+静态方法`static`的声明中带有修饰符，应使用类名调用它们，而无需创建该类的实例，
+
+```
+ClassName.methodName（args）
+```
+
+还可以使用对象引用来引用静态方法，但不建议使用
+
+```
+instanceName.methodName（args）
+```
+
+- 实例方法可以直接访问实例变量和实例方法。
+- 实例方法可以直接访问类变量和类方法。
+- 类方法可以直接访问类变量和类方法。
+- 类方法**不能直接**访问实例变量或实例方法，它们必须使用对象引用。同样，类方法不能使用`this`关键字，因为没有实例可供`this`引用。
+
+### 初始化字段Initializing Fields
+
+* 声明中为字段提供初始值
+* 实例变量可以在构造函数中初始化
+* 静态初始化块：static{ }一个类可以有不限数量的静态初始块定义在类的任何地方，运行时系统保证静态初始化块按在源代码中出现的顺序被调用
+* 可以将静态初始快写成私有的静态方法，私有静态方法的优点是需要重新初始化类变量时可以调用该静态方法
+* 可以在构造器中初始化实例变量，有两种方法：初始块和final方法，
+* 初始块{}和静态初始块static{}的区别是没有static关键字，java编译器将初始块赋值到每个构造器中，该方法可以在多个构造器之间共享代码
+* final方法不能在子类当中被复写，class a{final fun()}
+
+## 3.嵌套类Nested Classes
+
+在另一个类中定义一个类,这样的类称为*嵌套类*， 嵌套类分为两类：静态和非静态。声明`static`的*嵌套类*称为*静态嵌套类*。非静态嵌套类称为*内部类*。嵌套类可以使用public、private、protected、*package private*（默认）修饰符，而外部类只能使用public或*package private*修饰符。
+
+> A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class. 
+>
+> 嵌套类是封闭类enclosing class的成员，非静态嵌套类（内部类）可以访问封闭类的成员，即使封闭类成员声明为private，静态嵌套类不能访问封闭类的其它成员
+
+```
+class OuterClass {//外部类
+    ...
+    class NestedClass {//内部类
+        ...
+    }
+    class static NestedClass {//静态嵌套类
+       ...
+    }
+}
+```
+
+使用嵌套类的优点：
+
+* 是一种对仅在一个地方使用的类进行逻辑分组的方法：如果B类仅对另一个A类有用，则将B类嵌入到A类保持两者是合乎逻辑的，嵌套B类到A类中可以使包更加简单。
+* 增加封装性：两个顶级类A和B，B需要访问A的声明为private的成员，普通的类将不能访问到该类的private成员，可以通过将B类嵌入到A类中，则B类可以访问到A类的private成员，除此之外，B类可以对外界隐藏。
+* 增加代码可读性和维护性：在顶级类中嵌套**嵌套类**将会使嵌套类的代码靠近使用嵌套类的类
+
+### 静态嵌套类*static nested classes*
+
+与类变量和类方法一样，静态嵌套类与其外部类相关联。
+
+与静态方法（类方法）一样，静态嵌套类不能直接引用其封闭类中定义的实例变量或方法，只能通过对象引用来使用实例变量和方法。
+
+静态嵌套类与其外部类的实例成员进行交互，就像在其它任何顶级类一样，静态嵌套类在行为上是顶级类，为了包装方便，该顶级类嵌套在另一个顶级类中。
+
+静态嵌套类使用封闭类访问：
+
+```
+OuterClass.StaticNestedClass
+```
+
+静态嵌套类创建对象：
+
+```
+OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass （）;
+```
+
+### 内部类*inner classes*
+
+与实例方法和变量一样，内部类与其所在类的实例相关联，并且可以直接访问该对象（实例）的方法和字段。
+
+内部类与实例相关联，不能定义任何静态成员（静态方法、静态变量）
+
+内部类可以使用private、public、protected、package private修饰符
+
+> Objects that are instances of an inner class exist *within* an instance of the outer class
+>
+> 内部类的实例存在于外部类的实例之中，
+
+要实例化内部类必须先实例化外部类
+
+```
+OuterClass.InnerClass innerObject = externalObject.new InnerClass（）;
+```
+
+两种特殊的内部类：本地类和匿名类，在方法体内声明一个内部类，称为本地类，如果该类不命名，则称为匿名类
+
+### 本地类Local Classes
+
+
+
+### 匿名类Anonymous Classes
+
+匿名类使代码简洁，可以同时声明和实例化一个类。同内部类，但是匿名类没有类名，只使用一次。
 
 ### lambda表达式
 
+
+
 ### 何时使用嵌套类、本地类、匿名类和lambda表达式
 
+
+
 ## 4.枚举类型
+
+
 
 ### 1.字符串和编码
 
