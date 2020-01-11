@@ -801,7 +801,23 @@ if(条件判断1){
 
 #### switch语句
 
+switch语句可以具有多条执行语句路径，值可以是char、byte、short、int、枚举类型、String以及一些包装了基本类型chat、byte、short、int的特殊类。不使用float、double、boolean类型的数据。if 语句可以基于值或者条件的范围判断表达式，而switch只能基于单个值、枚举类型和String对象判断表达式。匹配的case之后若无break语句，则执行下一条case，直到遇到break终止switch语句或者switch语句块执行完为止。String对象的case比较相当于使用String.equals()方法，可以使用toLowerCase()方法使字符都小写以完成匹配。
 
+switch(值){
+
+case 值1:语句1；
+
+break;
+
+case 值2:语句2；
+
+break;
+
+default:语句3；
+
+break；
+
+}
 
 #### while和do-while语句
 
