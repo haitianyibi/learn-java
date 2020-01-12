@@ -876,7 +876,16 @@ OuterClass.InnerClass innerObject = externalObject.new InnerClass（）;
 
 ## 4.枚举类型
 
+* 枚举类型是特殊的类型使一个变量是一组预定义的常量，该变量必须等于其预定义的值之一
+* 枚举类型是常量，枚举字段使用大写字母
+* *所有*枚举都隐式扩展`java.lang.Enum`，一个类只能 扩展一个父类，因此枚举类型不能扩展其他类
 
+```
+public enum Day {
+    SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
+    THURSDAY, FRIDAY, SATURDAY 
+}
+```
 
 ### 1.字符串和编码
 
@@ -905,9 +914,9 @@ enum Weekday {
 - 定义的每个实例都是引用类型的唯一实例；
 - 可以将`enum`类型用于`switch`语句。
 
-# 五、注释
+# 五、注释Annotations 
 
-注释是元数据的一种形式，为编译器提供信息。
+注释是元数据的一种形式，为编译器提供信息，编译器可以使用注释来检测错误或禁止显示警告。不属于程序本身，注释对代码的操作没有直接影响，可以使用工具生成XML代码。
 
 ## 1.注释基础
 
@@ -939,13 +948,95 @@ javadoc可以添加标签
 
 javadoc -d 文件夹名称 -author -version HelloWorld.java
 
+批注格式：
+
+@Override：@向编译器指示后面是注释，Override为注释名
+
+* 如果注释中没有元素，则可以省略括号
+* 可以在同一声明中使用多个注释
+* 注释具有相同的类型，则称为重复注释
+
+```
+@Author（
+   name =“ Benjamin Franklin”，
+   date =“ 3/27/2003” 
+）
+```
+
+```
+@SuppressWarnings(value = "unchecked")
+void myMethod() { ... }
+```
+
+```
+@SuppressWarnings("unchecked")
+void myMethod() { ... }
+```
+
+```
+@Author(name = "Jane Doe")
+@EBook
+class MyClass { ... }
+```
+
+```
+@Author(name = "Jane Doe")
+@Author(name = "John Smith")
+class MyClass { ... }
+```
+
 
 
 ## 2.声明注释类型
 
+* 注释类型是*interface的*一种形式
+
+声明注释类型：
+
+```
+@interface ClassPreamble {
+   String author();
+   String date();
+   int currentRevision() default 1;
+   String lastModified() default "N/A";
+   String lastModifiedBy() default "N/A";
+   // Note use of array
+   String[] reviewers();
+}
+```
+
+使用注释类型：
+
+```
+@ClassPreamble (
+   author = "John Doe",
+   date = "3/17/2002",
+   currentRevision = 6,
+   lastModified = "4/12/2004",
+   lastModifiedBy = "Jane Doe",
+   // Note array notation
+   reviewers = {"Alice", "Bob", "Cindy"}
+)
+```
+
 ## 3.预定义的注释类型
 
+Java SE API中预定义了一组注释类型
+
+* **@Deprecated**：注释指示已标记的元素已*弃用*，不应再使用
+* **@Override**：注释通知编译器该元素用于覆盖超类中声明的元素
+* **@SuppressWarnings**：告诉编译器禁止以其他方式生成的特定警告
+
+适用于其他注释的注释称为*元注释*：
+
+* **@Retention**：指定标记的注释的存储方式
+* **@Documented**：当使用指定的注释时，都应使用Javadoc工具记录这些元素
+* **@Target**：标记了另一个批注
+* **@Inherited**：指示批注类型可以从超类继承
+
 ## 4.类型注释和可插入类型系统
+
+
 
 ## 5.重复注释
 
