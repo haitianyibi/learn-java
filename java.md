@@ -796,7 +796,7 @@ instanceName.methodName（args）
 
 在另一个类中定义一个类,这样的类称为*嵌套类*， 嵌套类分为两类：静态和非静态。声明`static`的*嵌套类*称为*静态嵌套类*。非静态嵌套类称为*内部类*。嵌套类可以使用public、private、protected、*package private*（默认）修饰符，而外部类只能使用public或*package private*修饰符。
 
-> A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class. 
+> A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class 
 >
 > 嵌套类是封闭类enclosing class的成员，非静态嵌套类（内部类）可以访问封闭类的成员，即使封闭类成员声明为private，静态嵌套类不能访问封闭类的其它成员
 
@@ -856,15 +856,80 @@ OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass （
 OuterClass.InnerClass innerObject = externalObject.new InnerClass（）;
 ```
 
-两种特殊的内部类：本地类和匿名类，在方法体内声明一个内部类，称为本地类，如果该类不命名，则称为匿名类
+两种特殊的内部类：局部类和匿名类，在方法体内声明一个内部类，称为本地类，如果该类不命名，则称为匿名类
 
-### 本地类Local Classes
+匿名类除了没有名字外，其它和局部类并没有什么不同
 
+局部类和匿名类都可以访问封闭类的成员。
 
+### 局部类Local Classes
+
+> Local classes are classes that are defined in a *block*, which is a group of zero or more statements between balanced braces.
+>
+> 局部类（或本地类）是在块中定义的类，该块是平衡括号之间的一组零个或多个语句。
+
+可以在任何块内定义局部类，可以在方法体、for循环、if语句定义局部类，
+
+> In addition, a local class has access to local variables. However, a local class can only access local variables that are declared final.
+>
+> 此外，局部类有权访问其所在类的成员，局部类可以访问局部变量，但只能访问声明为final的局部变量
+
+> When a local class accesses a local variable or parameter of the enclosing block, it *captures* that variable or parameter.
+>
+> 当局部类访问封闭块enclosing block的局部变量或参数时，它将**捕获**该变量和方法
+
+捕获的变量是已经复制的变量，因此可以在嵌套类中使用。它必须被复制的原因是对象可能超出当前上下文。它必须是 final
+
+>  a local class can access local variables and parameters of the enclosing block that are final or *effectively final*. . A variable or parameter whose value is never changed after it is initialized is effectively final.
+>
+> 本地类可以访问final或effectively final的局部变量或封闭块的参数，一个变量或参数的值在初始化后没有改变过，则称effectively final
+
+遮蔽Shadowing：
+
+> If a declaration of a type (such as a member variable or a parameter name) in a particular scope (such as an inner class or a method definition) has the same name as another declaration in the enclosing scope, then the declaration *shadows* the declaration of the enclosing scope. 
+>
+> 如果在一个特定范围内（内部类或方法声明）声明的类型（如成员变量或参数名）和封闭范围内的另一个声明重名，那么这个声明遮蔽了另一个在封闭范围内的声明。
+
+局部类中的类型声明也会遮蔽在封闭范围内具有相同名称的声明。
+
+局部类和内部类相似，不能定义或声明任何静态成员，静态方法中的局部类只能引用封闭类的静态成员
+
+> Local classes are non-static because they have access to instance members of the enclosing block. Consequently, they cannot contain most kinds of static declarations.
+>
+> 因为局部类和封闭块的实例成员联系，所以局部类是非静态的，相应的，局部类不能包含大多数静态声明
+
+不能在块内声明接口，接口本质上是静态的
+
+不能在局部类中声明静态初始化或成员接口
+
+局部类可以具有静态成员，静态成员要是常量变量，*常量变量*是原始类型或`String`声明为final并使用编译时常量表达式初始化的类型的变量
 
 ### 匿名类Anonymous Classes
 
 匿名类使代码简洁，可以同时声明和实例化一个类。同内部类，但是匿名类没有类名，只使用一次。
+
+本地类是类声明，而匿名类是表达式，匿名类表达式的语法类似于构造函数的调用，只是代码块中包含类定义。
+
+匿名类表达式包含以下内容：
+
+* new操作符
+* 实现的接口名或继承的类名
+* 括号中包含构造函数的参数，就像普通的类创建实例表达式一样，接口没有构造函数使用空括号
+* 类声明主体中允许方法的声明但是不允许使用语句
+
+匿名类是一个表达式，所以必须是语句的一部分
+
+匿名类可以访问封闭类的成员
+
+匿名类无法在封闭范围内访问未声明为final或effectively final的局部变量
+
+和嵌套类一样，匿名类中的类型声明会遮蔽封闭范围内具有相同名称的其他声明
+
+不能在匿名类中声明静态初始化或成员接口
+
+匿名类可以有静态成员，但是静态成员要是常量变量
+
+可以在匿名类中声明字段、未实现超类的方法、初始化实例、局部类，不可以在匿名类中声明构造函数
 
 ### lambda表达式
 
