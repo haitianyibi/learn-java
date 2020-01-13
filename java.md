@@ -16,6 +16,50 @@ IDE是集成开发环境：Integrated Development Environment
 * 多态
 * 继承
 
+Java技术既是编程语言又是平台。Java编程语言是一种高级语言，其特征包含
+
+* 简单Simple
+* 面向对象Object oriented
+* 分布式Distributed
+* 多线程Multithreaded
+* 动态Dynamic
+* 架构中立Architecture neutral
+* 高性能High performance
+* 随身携带Portable
+* 强大的Robust
+* 安全Secure
+
+#### java编程语言
+
+在java编程语言中，首先将所有源代码编写为以.java结尾的纯文本文件，然后由javac编译器编译为.class字节码文件，字节码文件和实际处理器机器语言无关，它是JVM （java虚拟机）的机器语言，然后java启动器工具使用java虚拟机运行程序。JVM可以在不同操作系统上使用，即相同的字节码文件在不同系统的机器上都可以运行。
+
+![image-20200113233001760](Java.assets/image-20200113233001760.png)
+
+#### java平台
+
+一个平台是在程序运行的硬件或软件环境，大多数平台可以描述为操作系统和底层硬件的组合，如Microsoft Windows，Linux，Solaris OS和Mac OS，但是java平台是一个基于软件的平台，可以在其它硬件上运行
+
+java平台具有两个组件：
+
+* java虚拟机，是java平台的基础，已经移植到各种基于硬件的平台上
+* java应用程序编程接口API，大量现成软件组件的集合，分为相关类和接口的库，这些库称为软件包
+
+![image-20200113233706956](Java.assets/image-20200113233706956.png)
+
+作为一个平台独立的环境，Java平台可能比本地代码慢一些。但是，编译器和虚拟机技术的进步使性能接近本机代码，而不会威胁可移植性。
+
+#### java技术可以做什么
+
+通用的高级的java编程语言是一个有力的软件平台，java平台提供以下功能：
+
+* 开发工具：编译、运行、监视、调试和记录应用程序所需的一切工具，主要工具javac编译器、java启动器、javadoc文档工具
+* 应用程序编程接口API：提供许多有用的类，涵盖基本对象到网络和安全性、XML生成、数据库访问
+* 部署技术：JDK软件提供了标准的机制，例如Java Web Start软件和Java Plug-In软件，用于将应用程序部署到最终用户。
+* 用户界面工具包：JavaFX，Swing和Java 2D工具包使创建复杂的图形用户界面（GUI）成为可能。
+* 集成库：诸如Java IDL API，JDBC API，Java命名和目录接口（JNDI）API，Java RMI和通过Internet ORB协议技术（Java RMI-IIOP Technology）进行Java远程方法调用的集成库可实现数据库访问和操作远程对象。
+
+
+
 # 一、java环境设置
 
 ### 1.下载安装JavaJDK
@@ -87,7 +131,7 @@ JVM会自动编译并运行文件
 
 [出现编码GBK不可映射字符](https://jingyan.baidu.com/article/e3c78d649a56233c4c85f502.html)
 
-因为代码中含有中文，包括注释，系统默认编码格式GBK，中文字符代码格式UNICODE或UTF-8
+因为代码中含有中文，包括注释，命令行系统默认编码格式GBK，中文字符代码格式UNICODE或UTF-8
 
 notepad++编译器具有自动转码功能。
 
@@ -684,6 +728,10 @@ public double calculateAnswer(){
 
 * `new`运算符返回的引用不必分配给变量。也可以直接在表达式中使用
 
+  ```
+  int height = new Rectangle().height;
+  ```
+
 ### 创建对象
 
 * 声明**Declaration**=类型+变量名/对象名
@@ -719,18 +767,40 @@ public double calculateAnswer(){
 ### this关键字
 
 * 实例方法 instance method或构造函数constructor中，this关键字是对当前对象 *current object* 的引用reference ，当前对象将被调用其方法或构造函数
-* 构造函数中可以调用同一类中的另一个构造函数，称为显示构造函数调用
+
 * 类包含一组构造函数。每个构造函数都会初始化矩形的一些或所有成员变量。构造函数为参数未提供其初始值的任何成员变量提供默认值
-* 则另一个构造函数的调用必须是该构造函数的第一行
+
+  >  Each argument to the constructor shadows one of the object's fields
 
 ```
- public Point(int x, int y) {
+ public Point(int x, int y) {//类的方法参数变量使用类的字段同名变量
         this.x = x;
         this.y = y;
  }
- public Rectangle() {
-        this(0, 0, 1, 1);//必须是第一行执行代码
- }
+```
+
+* 构造函数中可以调用同一类中的另一个构造函数，称为显示构造函数调用
+* 则另一个构造函数的调用必须是该构造函数的第一行
+
+```
+public class Rectangle {
+    private int x, y;
+    private int width, height;
+        
+    public Rectangle() {
+        this(0, 0, 1, 1);
+    }
+    public Rectangle(int width, int height) {
+        this(0, 0, width, height);
+    }
+    public Rectangle(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    ...
+}
 ```
 
 ### 访问控制Controlling Access
@@ -826,13 +896,15 @@ class OuterClass {//外部类
 
 静态嵌套类与其外部类的实例成员进行交互，就像在其它任何顶级类一样，静态嵌套类在行为上是顶级类，为了包装方便，该顶级类嵌套在另一个顶级类中。
 
-静态嵌套类使用封闭类访问：
+静态嵌套类使用封闭类访问 (类访问静态字段)：
 
 ```
 OuterClass.StaticNestedClass
 ```
 
-静态嵌套类创建对象：
+静态嵌套类创建对象（类创建对象）：
+
+* 非静态嵌套类先实例化外部类才能实例化非静态嵌套（内部类）
 
 ```
 OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass （）;
@@ -853,16 +925,73 @@ OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass （
 要实例化内部类必须先实例化外部类
 
 ```
-OuterClass.InnerClass innerObject = externalObject.new InnerClass（）;
+OuterClass.InnerClass innerObject = outerObject.new InnerClass（）;
 ```
+
+遮蔽Shadowing（使用关键字`this`来表示封闭范围）：
+
+```
+public class ShadowTest {
+    public int x = 0;//
+    class FirstLevel {//内部类
+        public int x = 1;//内部类字段使用外部类的字段的同名变量
+        void methodInFirstLevel(int x) {//内部类的方法参数使用内部类的字段的同名变量
+            System.out.println("x = " + x);//返回内部对象的方法参数的值
+            System.out.println("this.x = " + this.x);//方法所在内部类的对象的字段值
+            System.out.println("ShadowTest.this.x = " + ShadowTest.this.x);//外部类对象字段
+        }
+    }
+    public static void main(String... args) {//主函数
+        ShadowTest st = new ShadowTest();//创建外部对象
+        ShadowTest.FirstLevel fl = st.new FirstLevel();//创建内部对象
+        fl.methodInFirstLevel(23);//调用内部对象的方法
+    }
+}
+```
+
+> 输出结果：
+>
+> x = 23
+> this.x = 1
+> ShadowTest.this.x = 0
+
+不建议对内部类，匿名类、局部类进行序列化Serialization，如果序列化一个内部类，然后使用其他JRE实现对其进行反序列化，则可能会遇到兼容性问题
+
+### 局部类Local Classes
 
 两种特殊的内部类：局部类和匿名类，在方法体内声明一个内部类，称为本地类，如果该类不命名，则称为匿名类
 
+局部类是在块中定义的类，该块是平衡括号之间的一组零个或多个语句。一般在方法主体中定义的局部类。
+
 匿名类除了没有名字外，其它和局部类并没有什么不同
 
-局部类和匿名类都可以访问封闭类的成员。
+```
+class ClassA {
+	private int a;
+	public void test() {
+		System.out.println("外部类方法");		
+	}
+	public void testB() {
+		class ClassB {
+			private int b;
+			public void testB() {
+				System.out.println("局部类...");
+			}
+		}
+		ClassB b = new ClassB();   //局部类创建实例
+		b.testB();					//实例调用testB()方法
+	}
+}
+public class TestA {
+	public static void main(String[] args) {
+		ClassA classA = new ClassA();
+		classA.test();
+		classA.testB();  //调用局部类		
+	}
+ }
+```
 
-### 局部类Local Classes
+局部类和匿名类都可以访问封闭类的成员。
 
 > Local classes are classes that are defined in a *block*, which is a group of zero or more statements between balanced braces.
 >
@@ -906,7 +1035,9 @@ OuterClass.InnerClass innerObject = externalObject.new InnerClass（）;
 
 ### 匿名类Anonymous Classes
 
-匿名类使代码简洁，可以同时声明和实例化一个类。同内部类，但是匿名类没有类名，只使用一次。
+匿名类，就是没有名称的类，其名称由Java编译器给出，一般是形如：外部类名称+$+匿名类顺序，没有名称也就是其他地方就不能引用，不能实例化，只用一次，当然也就不能有构造器，匿名类就是利用父类的构造函数和自身类体构造成一个类。
+
+匿名类使代码简洁，可以同时声明和实例化一个类。
 
 本地类是类声明，而匿名类是表达式，匿名类表达式的语法类似于构造函数的调用，只是代码块中包含类定义。
 
@@ -917,7 +1048,20 @@ OuterClass.InnerClass innerObject = externalObject.new InnerClass（）;
 * 括号中包含构造函数的参数，就像普通的类创建实例表达式一样，接口没有构造函数使用空括号
 * 类声明主体中允许方法的声明但是不允许使用语句
 
-匿名类是一个表达式，所以必须是语句的一部分
+```
+HelloWorld frenchGreeting = new HelloWorld() {
+        String name = "tout le monde";
+        public void greet() {
+          greetSomeone("tout le monde");
+        }
+        public void greetSomeone(String someone) {
+            name = someone;
+            System.out.println("Salut " + name);
+        }
+};
+```
+
+匿名类是一个表达式，所以必须是语句的一部分，末尾以分号结尾
 
 匿名类可以访问封闭类的成员
 
