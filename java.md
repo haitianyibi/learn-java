@@ -283,8 +283,10 @@ java编程语言是静态类型的，必须先声明所有变量后使用。变�
 * **long**:long数据类型是64位二进制补码整数。可以使用Long类静态方法compareUnsigned、divideUnsigned等将int数据类型表示无符号的64位整数进行运算。
 * **float**:float数据类型是单精度32位IEEE 754浮点数。
 * **double**:double数据类型是双精度64位IEEE 754浮点数。
+* **char**:chart数据类型是单个16位Unicode字符。最小值为\u0000即0，最大值为\uffff 65535
 * **boolean**:boolean数据类型只有两个可能的值：true和false。
-* **char**:chart​数据类型是单个16位Unicode字符。最小值为\u0000即0，最大值为\uffff 65535
+
+![image-20200114230510316](Java.assets/image-20200114230510316.png)
 
 在java.lang.String类为字符串提供特殊支持，用双引号扩住字符串会自动创建一个新String对象，String对象是不可变的，意味着对象一旦创建就无法更改，该类不是基本数据类型。
 
