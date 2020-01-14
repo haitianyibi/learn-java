@@ -1166,7 +1166,7 @@ enum Weekday {
 
 注释是元数据（描述数据的数据）的一种形式，为编译器提供信息，编译器可以使用注释来检测错误或禁止显示警告。不属于程序本身，注释对代码的操作没有直接影响，可以使用工具生成XML代码。
 
-## 1.注释基础
+## 1.注释基础Annotations Basics
 
 * 单行注释（可以用于查找错误）
 
@@ -1201,8 +1201,12 @@ javadoc -d 文件夹名称 -author -version HelloWorld.java
 @Override：@向编译器指示后面是注释，Override为注释名
 
 * 如果注释中没有元素，则可以省略括号
-* 可以在同一声明中使用多个注释
-* 注释具有相同的类型，则称为重复注释
+
+```
+@Override
+```
+
+* 批注可以包含可以命名或未命名的元素*elements*，并且这些元素具有值
 
 ```
 @Author（
@@ -1216,10 +1220,14 @@ javadoc -d 文件夹名称 -author -version HelloWorld.java
 void myMethod() { ... }
 ```
 
+只有一个名为`value`的元素，则可以省略该名称
+
 ```
 @SuppressWarnings("unchecked")
 void myMethod() { ... }
 ```
+
+可以在同一声明中使用多个注释
 
 ```
 @Author(name = "Jane Doe")
@@ -1227,17 +1235,52 @@ void myMethod() { ... }
 class MyClass { ... }
 ```
 
+注释具有相同的类型，则称为重复注释
+
 ```
 @Author(name = "Jane Doe")
 @Author(name = "John Smith")
 class MyClass { ... }
 ```
 
+需要使用注释的地方：
 
+注释可以应用与声明，类、字段方法和其他的声明
+
+注释也可以应用于类型的使用，如：
+
+* 类的实例创建表达式
+
+```
+    new @Interned MyObject();
+```
+
+* 类型转换Type cast:
+
+```
+    myString = (@NonNull String) str;
+```
+
+* 实现条款`implements` clause:
+
+```
+    class UnmodifiableList<T> implements
+        @Readonly List<@Readonly T> { ... }
+```
+
+* 引发异常声明Thrown exception declaration:
+
+```
+    void monitorTemperature() throws
+        @Critical TemperatureException { ... }
+```
+
+这种形式的注释称为*类型注释*
 
 ## 2.声明注释类型
 
 * 注释类型是*interface的*一种形式
+* 要使用注释添加相同的元数据，必须首先定义*注释类型*
 
 声明注释类型：
 
@@ -1267,48 +1310,135 @@ class MyClass { ... }
 )
 ```
 
-## 3.预定义的注释类型
+要使其中的信息`@ClassPreamble`出现在Javadoc生成的文档中，您必须使用注释对`@ClassPreamble`定义进行`@Documented`注释：
 
-Java SE API中预定义了一组注释类型
+```
+import java.lang.annotation.*;
+@Documented
+@interface ClassPreamble {
+   // Annotation element definitions
+}
+```
+
+## 3.预定义的注释类型Predefined Annotation Types
+
+Java SE API在java.lang中预定义了一组注释类型
 
 * **@Deprecated**：注释指示已标记的元素已*弃用*，不应再使用
 * **@Override**：注释通知编译器该元素用于覆盖超类中声明的元素
 * **@SuppressWarnings**：告诉编译器禁止以其他方式生成的特定警告
+* **@SafeVarargs**：批注应用于方法或构造函数时，断言该代码不会对其`varargs`参数执行潜在的不安全操作
+* **@FunctionalInterface**：批注指示Java语言规范中定义的类型声明旨在用作功能接口
 
 适用于其他注释的注释称为*元注释*：
 
 * **@Retention**：指定标记的注释的存储方式
+* * `RetentionPolicy.SOURCE` –标记的注释仅保留在源级别中，并且被编译器忽略。
+  * `RetentionPolicy.CLASS` –标记的注释在编译时由编译器保留，但被Java虚拟机（JVM）忽略。
+  * `RetentionPolicy.RUNTIME` –标记的注释由JVM保留，因此可以由运行时环境使用。
 * **@Documented**：当使用指定的注释时，都应使用Javadoc工具记录这些元素
 * **@Target**：标记了另一个批注
+* * `ElementType.ANNOTATION_TYPE` 可以应用于注释类型。
+  * `ElementType.CONSTRUCTOR` 可以应用于构造函数。
+  * `ElementType.FIELD` 可以应用于字段或属性。
+  * `ElementType.LOCAL_VARIABLE` 可以应用于局部变量。
+  * `ElementType.METHOD` 可以应用于方法级注释。
+  * `ElementType.PACKAGE` 可以应用于包声明。
+  * `ElementType.PARAMETER` 可以应用于方法的参数。
+  * `ElementType.TYPE` 可以应用于类的任何元素。
 * **@Inherited**：指示批注类型可以从超类继承
+* **@Repeatable**：释表示可以将标记的注释多次应用于同一声明或类型使用
 
-## 4.类型注释和可插入类型系统
+## 4.类型注释和可插入类型系统Type Annotations and Pluggable Type Systems
 
+这种形式的注释称为*类型注释*
 
+* 类实例创建表达式（`new`）
+* 强制类型转换
+* `implements`子句
+* `throws`子句
 
-## 5.重复注释
+确保程序中的特定变量永远不会被分配为null
 
-java异常
+```
+@NonNull String str;
+```
 
-捕获异常
+## 5.重复注释Repeating Annotations
 
-try{
+对声明或类型使用应用相同的批注
 
-}catch(){
+```
+@Schedule（dayOfMonth =“ last”）
+@Schedule（dayOfWeek =“ Fri”，hour =“ 23”）
+```
 
+```
+@Alert（role =“ Manager”）
+@Alert（role =“ Administrator”）
+```
+
+注释类型必须使用`@Repeatable`元注释进行标记，声明可重复的注释类型
+
+```
+import java.lang.annotation.Repeatable;
+@Repeatable(Schedules.class)
+public @interface Schedule {
+  String dayOfMonth() default "first";
+  String dayOfWeek() default "Mon";
+  int hour() default 12;
 }
+```
 
-抛出异常
+包含的注释类型必须具有`value`带有数组类型的元素。数组类型的组件类型必须是可重复注释类型
 
+```
+public @interface Schedules {
+    Schedule[] value();
+}
+```
 
+检索注释：检索批注。返回单个注释的方法的行为
 
-# 六、接口和继承
+# 六、接口和继承interfaces and inheritance
 
 子类可以从超类继承字段和方法，所有的类都派生自object类，接口的实现和继承
 
-## 1.接口
+## 1.接口Interfaces
 
-implements实现
+> In the Java programming language, an *interface* is a reference type, similar to a class, that can contain *only* constants, method signatures, default methods, static methods, and nested types. Method bodies exist only for default methods and static methods. Interfaces cannot be instantiated—they can only be *implemented* by classes or *extended* by other interfaces. 
+>
+> 在java编程语言中，接口是一个引用类型，与类相似，但只能包含常量、方法签名、默认方法、静态方法和嵌套类型。默认方法和静态方法才能有方法主体，接口不能被实例化，只能被类实现或继承其它接口。
+
+定义一个接口与创新一个新的类相似，方法签名没有大括号braces，使用分号semicolon结束
+
+```
+public interface OperateCar {
+   // constant declarations, if any
+   // method signatures
+   // An enum with values RIGHT, LEFT
+   int turn(Direction direction,double radius,double startSpeed,double endSpeed);
+   int changeLanes(Direction direction,double startSpeed,double endSpeed);
+   int signalTurn(Direction direction,boolean signalOn);
+   int getRadarFront(double distanceToCar,double speedOfCar);
+   int getRadarRear(double distanceToCar,double speedOfCar);
+   ...
+   // 更多的方法签名more method signatures
+}
+```
+
+使用接口，需要类implements实现接口，可实例化的类 instantiable class实现接口，可以使接口声明的方法提供方法体
+
+```
+public class OperateBMW760i implements OperateCar {
+    int signalTurn(Direction direction, boolean signalOn) {
+	//有方法体大括号
+}
+```
+
+接口作为API Interfaces as APIs（*Application Programming Interface (API)*）：
+
+
 
 interface接口
 
@@ -1359,8 +1489,6 @@ Java的接口（interface）定义了纯抽象规范，一个类可以实现多�
 接口的所有方法都是抽象方法，接口不能定义实例字段；
 
 接口可以定义`default`方法
-
-接口作为API
 
 ### 定义接口
 
