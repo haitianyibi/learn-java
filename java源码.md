@@ -143,7 +143,163 @@ public String getName() {
 
 ### Boolean类
 
+```
+public final class Boolean implements java.io.Serializable,Comparable<Boolean>{}
+```
+
+#### 1.TRUE
+
+```java
+public static final Boolean TRUE = new Boolean(true);
+```
+
+#### 2.FALSE
+
+```java
+public static final Boolean FALSE = new Boolean(false);
+```
+
+#### 3.TYPE
+
+```
+public static final Class<Boolean> TYPE=(Class<Boolean>) Class.getPrimitiveClass("boolean");
+```
+
+#### 4.value
+
+```
+private final boolean value;
+```
+
+#### 5.Boolean()构造方法
+
+```
+
+```
+
+#### 6.serialVersionUID()
+
+```
+private static final long serialVersionUID = -3665804199014368530L;
+```
+
+#### 7.praseBoolean()
+
+```
+public static boolean parseBoolean(String s) {return "true".equalsIgnoreCase(s);}
+```
+
+#### 8.booleanValue()
+
+```
+public boolean booleanValue(){return value;}
+```
+
+#### 9.valueOf()
+
+```
+public static Boolean valueOf(boolean b) {return (b ? TRUE : FALSE);}
+public static Boolean valueOf(String s){return parseBoolean(s) ? TRUE : FALSE;}
+```
+
+#### 10.toString()
+
+```
+public String toString() {return value ? "true" : "false";}
+public static String toString(boolean b) {return b ? "true" : "false";}
+```
+
+#### 11.hashCode()
+
+```
+public int hashCode() {return Boolean.hashCode(value);}
+public static int hashCode(boolean value) {return value ? 1231 : 1237;}
+
+```
+
+#### 12.equals()
+
+```
+public boolean equals(Object obj) {if (obj instanceof Boolean) {return value == ((Boolean)obj).booleanValue();}return false;}
+```
+
+#### 13.getBoolean()
+
+```
+public static boolean getBoolean(String name) {boolean result = false;try { result = parseBoolean(System.getProperty(name));} catch (IllegalArgumentException | NullPointerException e) {}return result;}
+```
+
+#### 14.compareTo()
+
+```
+ public int compareTo(Boolean b) {
+        return compare(this.value, b.value);
+    }
+```
+
+#### 15.compare()
+
+```
+public static int compare(boolean x, boolean y) {
+        return (x == y) ? 0 : (x ? 1 : -1);
+    }
+```
+
+#### 16.logicalAnd()
+
+```
+public static boolean logicalAnd(boolean a, boolean b) {
+        return a && b;
+    }
+```
+
+#### 17.logicalOr()
+
+```
+public static boolean logicalOr(boolean a, boolean b) {
+        return a || b;
+    }
+```
+
+#### 18.logicalXor()
+
+```
+public static boolean logicalXor(boolean a, boolean b) {
+        return a ^ b;
+}
+```
+
 ### Byte类
+
+#### 1.MIN_VALUE
+
+```
+public static final byte   MIN_VALUE = -128;
+```
+
+#### 2.MAX_VALUE
+
+```
+public static final byte   MAX_VALUE = 127;
+```
+
+#### 3.TYPE
+
+```
+public static final Class<Byte>     TYPE = (Class<Byte>) Class.getPrimitiveClass("byte");
+```
+
+#### 4.toString()
+
+```
+public static String toString(byte b) {return Integer.toString((int)b, 10);}
+```
+
+
+
+
+
+
 
 ### Character类
 
