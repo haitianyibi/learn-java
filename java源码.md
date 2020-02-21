@@ -2,6 +2,8 @@
 
 # Java.base模块
 
+定义Java S平台的基础API
+
 ## Java.lang包
 
 ### Object类
@@ -389,6 +391,217 @@ public static native double acos(double a);
 public static native double atan(double a);
 ```
 
+# Java.compller模块
 
+定义语言模型，注释处理和Java编译器API
 
-### 
+# Java.datatransfer模块
+
+定义用于在应用程序之间和应用户程序内部传输数据的API
+
+# Java.desktop模块
+
+定义AWT和Swing用户界面工具包，以及用于辅助功能，音频，图像，打印和JavaBean的API。
+
+# java.instrument 
+
+定义允许代理检测在JVM上运行的程序的服务。
+
+# java.logging	
+定义Java Logging API。
+# java.management	
+定义Java管理扩展（JMX）API。
+# java.management.rmi	
+为Java管理扩展（JMX）远程API 定义RMI连接器。
+# java.naming	
+定义Java命名和目录接口（JNDI）API。
+# java.net.http	
+定义HTTP客户端和WebSocket API。
+# java.prefs	
+定义首选项API。
+# java.rmi	
+定义远程方法调用（RMI）API。
+# Java.scripiting	
+定义脚本API。
+# java.se	
+定义Java SE平台的API。
+
+# java.security.jgss	
+
+定义IETF通用安全服务API（GSS-API）的Java绑定。
+
+# java.security.sasl	
+
+为IETF简单身份验证和安全层（SASL）定义Java支持。
+
+# java.smartcardio	
+
+定义Java智能卡I / O API。
+
+# java.sql	
+
+定义JDBC API。
+
+# java.sql.rowset	
+
+定义JDBC RowSet API。
+
+# java.transaction.xa	
+
+定义用于支持JDBC中的分布式事务的API。
+
+# java.xml	
+
+定义用于XML处理的Java API（JAXP），用于XML的流API（StAX），用于XML的简单API（SAX）和W3C文档对象模型（DOM）API。
+
+# java.xml.crypto	
+
+定义用于XML加密的API。
+
+# jdk.accessibility	
+
+定义辅助技术的实现者使用的JDK实用工具类。
+
+# jdk.attach	
+
+定义附加API。
+
+# java.charsets
+
+提供charsets不在其中的内容java.base（主要是双字节和IBM字符集）。
+
+# jdk.compiler	
+
+定义系统Java编译器的实现 及其等效的命令行javac。
+
+# jdk.crypto.cryptoki	
+
+提供SunPKCS11安全提供程序的实现。
+
+# jdk.crypto.ec	
+
+提供SunEC安全提供程序的实现。
+
+# jdk.dynalink	
+
+定义用于动态链接对象高级操作的API。
+
+# jdk.editpad	
+
+提供实现所使用的编辑板服务jdk.jshell。
+
+# jdk.hotspot.agent	
+
+定义HotSpot可服务性代理的实现。
+
+# jdk.httpserver	
+
+定义特定于JDK的HTTP服务器API。
+
+# jdk.jar工具	
+
+定义用于操作Java Archive（JAR）文件的工具，包括jar和 jarsigner工具。
+
+# jdk.javadoc	
+
+定义系统文档工具的实现 及其等效的命令行javadoc。
+
+# jdk.jcmd	
+
+定义用于诊断和排除JVM故障的工具，例如jcmd，jps， jstat工具。
+
+# jdk.jconsole	
+
+定义JMX图形工具jconsole，用于监视和管理正在运行的应用程序。
+
+# jdk.jdeps	
+
+定义用于分析Java库和程序中的依赖关系的工具，包括jdeps， javap和 jdeprscan工具。
+
+# jdk.jdi	
+
+定义Java调试接口。
+
+# jdk.jdwp.agent	
+
+提供Java调试线协议（JDWP）代理的实现。
+
+# jdk.jfr	
+
+定义JDK Flight Recorder的API。
+
+# jdk.jlink	
+
+定义JLINK创建运行时图像，工具JMOD用于创建和操作JMOD文件的工具，以及jimage用于检查类和资源的JDK实现特定的容器文件的工具。
+
+# jdk.jshell	
+
+提供用于评估Java代码段的jshell工具，并定义了JDK特定的API，用于建模和执行代码段。
+
+# jdk.js对象	
+
+定义JavaScript对象的API。
+
+# jdk.jstatd	
+
+定义用于启动守护程序的jstatd工具，该守护程序用于jstat工具以远程监视JVM统计信息。
+
+# jdk.localedata	
+
+提供除美国语言环境之外的其他语言环境的语言环境数据。
+
+# jdk.management	
+
+为JVM定义特定于JDK的管理接口。
+
+# jdk.management.agent	
+
+定义JMX管理代理。
+
+# jdk.management.jfr	
+
+定义JDK Flight Recorder的管理接口。
+
+# jdk.naming.dns	
+
+提供DNS Java命名提供程序的实现。
+
+#  jdk.naming.rmi	
+
+提供RMI Java命名提供程序的实现。
+
+# jdk.net	
+
+定义特定于JDK的网络API。
+
+# jdk.pack	
+
+定义用于将JAR文件转换为压缩的pack200文件并将打包的文件转换为JAR文件的工具，包括 pack200和 unpack200工具。
+
+# jdk.rmic	
+
+定义用于使用远程对象的Java远程方法协议（JRMP）生成存根和框架的rmic编译器。
+
+# jdk.scripting.nashorn	
+
+为使用ECMAScript 5.1编写的程序提供Nashorn脚本引擎和运行时环境的实现。
+
+# jdk.sctp	
+
+为SCTP定义特定于JDK的API。
+
+# jdk.security.auth	
+
+提供javax.security.auth.* 接口和各种身份验证模块的实现。
+
+# jdk.security.jgss	
+
+定义对GSS-API的JDK扩展以及SASL GSSAPI机制的实现。
+
+# jdk.xml.dom	
+
+定义不属于Java SE API的W3C文档对象模型（DOM）API的子集。
+
+# jdk.zipfs	
+
+提供Zip文件系统提供程序的实现。
